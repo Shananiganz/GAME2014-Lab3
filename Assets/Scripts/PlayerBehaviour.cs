@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+    [Header("Player Properties")]
     public float speed = 2.0f;
     public Boundary boundary;
     public float verticalPosition;
     public bool usingMobileInput = false;
     public ScoreManager scoreManager;
+
+    [Header("Bullet Properties")]
+    public Transform bulletSpawnPoint;
+    public GameObject bulletPrefab;
+    public Transform bulletParent;
+    public float fireRate = 0.2f;
 
     private Camera camera;
 
@@ -23,6 +30,8 @@ public class PlayerBehaviour : MonoBehaviour
         // Platform Detection for input
         usingMobileInput = Application.platform == RuntimePlatform.Android ||
                            Application.platform == RuntimePlatform.IPhonePlayer;
+
+        InvokeRepeating("FireBullets", 0.0f, fireRate);
     }
 
     // Update is called once per frame
@@ -65,6 +74,11 @@ public class PlayerBehaviour : MonoBehaviour
     {
         float clampedXPosition = Mathf.Clamp(transform.position.x, boundary.min, boundary.max);
         transform.position = new Vector2(clampedXPosition, verticalPosition);
+    }
+
+    void FireBullets()
+    {
+        var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity, bulletParent);
     }
 
 }
