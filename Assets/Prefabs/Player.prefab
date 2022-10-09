@@ -177,6 +177,5 @@ MonoBehaviour:
   usingMobileInput: 0
   scoreManager: {fileID: 0}
   bulletSpawnPoint: {fileID: 1485252434}
-  bulletPrefab: {fileID: 7913923206050300196, guid: b68eab200fc84364c9e961ce0c5d0987, type: 3}
-  bulletParent: {fileID: 0}
-  fireRate: 0.2
+  bulletManager: {fileID: 0}
+  fireRate: 0.1
